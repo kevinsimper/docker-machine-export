@@ -38,7 +38,6 @@ process.stdin.on('end', function() {
     }
   })
 
-  var readPromises = []
   var files = Promise.all(filesToExport.map(function(filename) {
     return fs.readFileAsync(path + '/' + filename, 'utf8').then(function (data) {
       // Base64 encode data certificate
