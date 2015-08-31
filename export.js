@@ -19,7 +19,7 @@ process.stdin.on('readable', function() {
 process.stdin.on('end', function() {
   var config = {}
   var path = null
-// os end of line
+
   env.split(os.EOL).forEach(function (line) {
     // Ignore comment lines
     if (line && line[0] !== '#') {

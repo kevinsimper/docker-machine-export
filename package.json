@@ -1,13 +1,13 @@
 {
   "name": "docker-machine-export",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Docker Machine export script",
   "main": "export.js",
   "bin": {
     "docker-machine-export": "./export.js"
   },
   "scripts": {
-    "test": "node test/index.js"
+    "test": "./node_modules/lab/bin/lab tests/unit.js"
   },
   "repository": {
     "type": "git",
@@ -28,5 +28,10 @@
   "homepage": "https://github.com/blackbeardapp/docker-machine-export#readme",
   "dependencies": {
     "bluebird": "2.9.34"
+  },
+  "devDependencies": {
+    "lab": "5.15.2",
+    "mock-stdin": "0.3.0",
+    "unexpected": "9.6.0"
   }
 }
