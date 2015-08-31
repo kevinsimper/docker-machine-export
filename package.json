@@ -1,0 +1,32 @@
+{
+  "name": "docker-machine-export",
+  "version": "0.0.1",
+  "description": "Docker Machine export script",
+  "main": "export.js",
+  "bin": {
+    "docker-machine-export": "./export.js"
+    },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blackbeardapp/docker-machine-export.git"
+  },
+  "keywords": [
+    "docker-machine",
+    "docker",
+    "export",
+    "swarm",
+    "env"
+  ],
+  "author": "James Brooking",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blackbeardapp/docker-machine-export/issues"
+  },
+  "homepage": "https://github.com/blackbeardapp/docker-machine-export#readme",
+  "dependencies": {
+    "bluebird": "2.9.34"
+  }
+}
