@@ -7,7 +7,7 @@
     "docker-machine-export": "./export.js"
   },
   "scripts": {
-    "test": "./node_modules/lab/bin/lab tests/unit.js"
+    "test": "./node_modules/lab/bin/lab -m 10000 tests/unit.js"
   },
   "repository": {
     "type": "git",

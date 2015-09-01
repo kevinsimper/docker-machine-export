@@ -30,7 +30,13 @@ lab.test('verify env variables read', function (done) {
       return stdin.shift()
     }
 
-    // Run actua export script
+    var stdout = []
+    var stdoutBk = process.stdout.write
+    process.stdout.write = function (output) {
+      stdout.push(output)
+    }
+
+    // Run actual export script
     require('../export')
 
     while (stdin.length !== 0) {
@@ -38,14 +44,21 @@ lab.test('verify env variables read', function (done) {
       if (stdin.length === 0) {
         process.stdin.emit('end')
 
-        // Here we should catch stdout
-        //{"DOCKER_TLS_VERIFY":"1","DOCKER_HOST":"tcp://192.168.0.0.1:2376","DOCKER_CERT_PATH":"/tmp","DOCKER_MACHINE_NAME":"swarm-test","ca.pem":"dGVzdA==","cert.pem":"dGVzdA==","id_rsa":"dGVzdA==","id_rsa.pub":"dGVzdA==","key.pem":"dGVzdA==","server-key.pem":"dGVzdA==","server.pem":"dGVzdA=="}
-        done()
+        setTimeout(function() {
+          process.stdout.write = stdoutBk
+          expect(stdout.length, 'to equal', 1)
+          expect(stdout[0], 'to equal', '{"DOCKER_TLS_VERIFY":"1","DOCKER_HOST":"tcp://192.168.0.0.1:2376",'+
+            '"DOCKER_CERT_PATH":"'+tmp+'","DOCKER_MACHINE_NAME":"swarm-test","ca.pem":"dGVzdA==",'+
+            '"cert.pem":"dGVzdA==","id_rsa":"dGVzdA==","id_rsa.pub":"dGVzdA==","key.pem":"dGVzdA==",'+
+            '"server-key.pem":"dGVzdA==","server.pem":"dGVzdA=="}'+os.EOL)
+
+          done()
+        }, 2000)
       }
     }
   }).catch(function (err) {
-      // Show error from creating test files
+    // Show error from creating test files
     expect(1, 'to equal', 0, err)
-      done()
+    done()
   })
 })
